@@ -4,12 +4,7 @@
 body {
     font-family: 'Muli', serif;
     color: #111;
-    /* position: relative; */
 }
-
-/* body, html {
-	height: 100%;
-} */
 
 code {
   color: #000;
@@ -41,7 +36,7 @@ html {
   /* Not required for template or sticky footer method. */
   
   body > .container {
-    padding: 60px 15px 0;
+    padding: 30px 15px 0;
   }
   
   .footer > .container {
