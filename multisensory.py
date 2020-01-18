@@ -1,20 +1,13 @@
 import os
-# import forms
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from forms import UploadForm
 
-ALLOWED_EXTENSIONS = {'mp4'}
-
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 48 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = join(dirname(realpath(__file__)), 'uploads/')
 app.secret_key = 'super secret key'
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/uploads/<filename>')
@@ -25,10 +18,10 @@ def uploaded_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = UploadForm()
-    # if request.method == 'POST' and form.validate_on_submit():
-
-    if form.validate_on_submit(): # only called for POST
-        flash(request.files)
+    flash(request.files)
+    if form.validate_on_submit():
+        flash("Form Validated!")
+        # flash(request.files)
         # input_file = request.files['input_file']
         # Do stuff
 

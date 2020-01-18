@@ -42,27 +42,31 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% for message in messages %}
-            <div id="errors" class="alert alert-warning" role="alert">
+            <div id="errors" class="alert alert-success" role="alert">
               {{ message }}
             </div>
             {% endfor %}
           {% endif %}
         {% endwith %}
-        {% block body %}{% endblock %}
+
+        {% if form.input_file.errors %}
+          {% for error in form.input_file.errors %}
+            <div id="errors" class="alert alert-warning" role="alert">
+              {{ error }}
+            </div>
+          {% endfor %}
+        {% endif %}
 
         <form method="post" enctype="multipart/form-data" class="form-row align-items-center">
           {{ form.hidden_tag() }}
 
           <div class="custom-file col-9">
-            {{ form.input_file(id="my-file-selector") }}
-            <!-- <input name="file" type="file" class="custom-file-input" id="my-file-selector"> -->
+            {{ form.input_file(id="my-file-selector", class_="custom-file-input" ) }}
             <label class="custom-file-label" for="customFileLang">Choose file...</label>
-            <!-- <input type="text" class="form-control" readonly> -->
           </div>
 
           <div class="col-auto">
             {{ form.submit(class_="btn btn-primary ml-3") }}
-            <!-- <input type="submit" id="upload" class="btn btn-success ml-3"> -->
           </div>
           
         </form>
