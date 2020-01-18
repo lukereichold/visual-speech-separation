@@ -1,52 +1,36 @@
 $(document).ready(function() {
   
-  bsCustomFileInput.init();
+  // bsCustomFileInput.init();
 
-  const spinner = document.getElementById("loading-spinner");
-  const uploadButton = document.getElementById("upload");
+  // const spinner = document.getElementById("loading-spinner");
+  // const uploadButton = document.getElementById("upload");
 
-  $('#upload').click(function() {
-
-    spinner.classList.add('show');
-    uploadButton.disabled = true;
-
-    var form_data = new FormData($('form')[0]);
-    // var form_data = new FormData();
-    // var fileToUpload = $('#customFile').prop('files')[0];
-    // form_data.append('file', fileToUpload);
-
-    var request = $.ajax({
-      url: "separate",
-      method: "POST",
-      data: form_data,
-      dataType: "json"
-    });
-     
-    request.done(function( data ) {
-      if (data.hasOwnProperty('error')) {
-        $('#errors').fadeIn();
-        $('#errors').html(data['error']);
-        return;
-      }
-
-      // TODO: Happy path
-      alert("done (success)")
-
-      // Clear out any errors:
-      $('#errors').hide();
-    });
-     
-    request.fail(function( jqXHR, textStatus ) {
-      alert(textStatus);
-      alert( "Request failed: " + textStatus );
-    });
-
-    request.always(function( msg ) { // Cleanup!
-      uploadButton.disabled = false;
-      spinner.classList.remove('show');
-    });
-
-
-  });
+  // $('#upload').click(function() {
+  //   spinner.classList.add('show');
+  //   uploadButton.classList.add('disabled');
+  //   uploadButton.textContent = 'Processing...';
+  // });
 
 });
+
+
+// $(document).on('change', '#browsebutton :file', function() {
+//   var input = $(this),
+//       numFiles = input.get(0).files ? input.get(0).files.length : 1,
+//       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+//   input.trigger('fileselect', [numFiles, label]);
+// });
+
+// $(document).ready( function() {
+//   $('#browsebutton :file').on('fileselect', function(event, numFiles, label) {
+//       var input = $(this).parents('.input-group').find(':text'),
+//           log = numFiles &gt; 1 ? numFiles + ' files selected' : label;
+
+//       if( input.length ) {
+//           input.val(log);
+//       } else {
+//           if( log ) alert(log);
+//       }
+
+//   });
+// });

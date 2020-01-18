@@ -39,22 +39,34 @@
 
         <p>Select a target video file (.mp4) to perform speech audio separation.</p>
 
-        <div id="errors" class="alert alert-warning" style="display:none;" role="alert">
-          <!-- Populated by AJAX -->
-        </div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+            <div id="errors" class="alert alert-warning" role="alert">
+              {{ message }}
+            </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
 
-        <form class="form-row align-items-center">
+        <form method="post" enctype="multipart/form-data" class="form-row align-items-center">
+          {{ form.hidden_tag() }}
 
           <div class="custom-file col-9">
-            <input name="customFile" type="file" class="custom-file-input" id="customFile">
+            {{ form.input_file(id="my-file-selector") }}
+            <!-- <input name="file" type="file" class="custom-file-input" id="my-file-selector"> -->
             <label class="custom-file-label" for="customFileLang">Choose file...</label>
+            <!-- <input type="text" class="form-control" readonly> -->
           </div>
 
           <div class="col-auto">
-            <button type="submit" id="upload" class="btn btn-success ml-3">Begin</button>
+            {{ form.submit(class_="btn btn-primary ml-3") }}
+            <!-- <input type="submit" id="upload" class="btn btn-success ml-3"> -->
           </div>
           
         </form>
+
 
         <!-- Loading spinner here -->
         <div id="loading-spinner" class="d-flex mt-4 justify-content-center">
