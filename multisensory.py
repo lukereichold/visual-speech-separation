@@ -1,8 +1,11 @@
 import os
+import tensorflow as tf
+
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from forms import UploadForm
+# import sep.driver
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 48 * 1024 * 1024
@@ -18,42 +21,21 @@ def uploaded_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = UploadForm()
-    flash(request.files)
+    flash(request.files) # for debugging
     if form.validate_on_submit():
-        flash("Form Validated!")
-        # flash(request.files)
-        # input_file = request.files['input_file']
-        # Do stuff
+        flash("Form Validated!") # debugging
+        file = request.files['input_file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash('File successfully uploaded.') # debugging
+        return redirect(url_for('uploaded_file', filename=filename)) 
 
     return render_template('index.html', form=form)
-
-# @app.route('/', methods=['GET', 'POST'])
-# def home():
-#     if request.method == 'POST':
-#         flash(request.files)
-#         if 'file' not in request.files:
-#             flash('No file was selected')
-#             return redirect(request.url)
-#         file = request.files['file']
-#         # flash(file)
-#         if file.filename == '':
-#             flash('No file was selected')
-#             return redirect(request.url)
-#         if not file or not allowed_file(file.filename):
-#             flash('Selected file is unsupported. Try again with a valid .mp4 file.')
-#             return redirect(request.url)
-
-#         # TODO! (Happy path)...
-#         # filename = secure_filename(file.filename)
-#         # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-#         # flash('File successfully uploaded.')
-#         # return redirect(url_for('uploaded_file', filename=filename))
-
-#     return render_template('index.html')
 
 
 def doSomething():
     pass
 
 if __name__ == '__main__':
+    print 'hello'
     app.run()
