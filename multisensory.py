@@ -5,7 +5,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template, sen
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from forms import UploadForm
-# import sep.driver
+import sep.driver
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 48 * 1024 * 1024
@@ -37,5 +37,4 @@ def doSomething():
     pass
 
 if __name__ == '__main__':
-    print 'hello'
     app.run()
