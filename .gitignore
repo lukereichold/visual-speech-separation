@@ -1,3 +1,6 @@
 *.pyc
 uploads/*
 .vscode
+sep/*.mp4
+sep/*.txt
+
