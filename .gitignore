@@ -1,5 +1,7 @@
 *.pyc
-uploads/*
+uploads/*.mp4
+results/*.mp4
+results/*.pk
 .vscode
 sep/*.mp4
 sep/*.txt

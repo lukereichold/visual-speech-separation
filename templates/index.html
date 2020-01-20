@@ -42,7 +42,7 @@
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             {% for message in messages %}
-            <div id="errors" class="alert alert-success" role="alert">
+            <div id="errors" class="alert alert-danger" role="alert">
               {{ message }}
             </div>
             {% endfor %}
@@ -71,7 +71,6 @@
           
         </form>
 
-
         <!-- Loading spinner here -->
         <div id="loading-spinner" class="d-flex mt-4 justify-content-center">
           <div class="spinner-border text-primary" role="status">
@@ -79,8 +78,24 @@
           </div>
         </div>
 
+      </div>
+
+
+      {% if results %}
+      <div class="mt-2">
+
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Separation Complete!</h4>
+
+          <ul class="list-group">
+            <li class="list-group-item">Download <a href="results/{{ results[0] }}" target="_blank">video with on-screen (foreground) audio</a></li>
+            <li class="list-group-item">Download <a href="results/{{ results[1] }}" target="_blank">video with off-screen (background) audio</a></li>
+          </ul>
+          <hr>
+        </div>
 
       </div>
+      {% endif %}
 
 
     </main>
