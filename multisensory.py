@@ -51,5 +51,11 @@ def handle_error(e):
     return render_template('index.html', form=UploadForm())
 
 
+@app.errorhandler(Exception)
+def handle_error(e):
+    flash("Sorry, an internal server error has occurred. Please try again later.")
+    return render_template('index.html', form=UploadForm())
+
+
 if __name__ == '__main__':
     app.run()
